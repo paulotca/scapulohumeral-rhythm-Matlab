@@ -50,6 +50,15 @@ M = x;
 function r = getGlobalM
 global M
 r = M;
+
+function setM2(x)
+global M2
+M2 = x;
+
+function r = getGlobalM2
+global M2
+r = M2;
+
 % --- Executes just before telaInicial is made visible.
 function telaInicial_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
@@ -114,8 +123,21 @@ setM(N)
 wh = waitbar(0,'Salvando...');steps = 100;for step = 1:30;waitbar(step / 100);end 
     for step = 30:100;waitbar(step / 100);end
     close(wh)
-meshc(getGlobalM);
-view(-180,90);
+meshc(handles.grafico , getGlobalM);
+set(handles.grafico,'view',[0,-90]);
+
+[arquivo, caminho]=uigetfile('*.txt');
+B2=[caminho,arquivo]
+%disp(B)
+N2 = importdata(B2);
+setM2(N2)
+%r = getGlobalM
+wh = waitbar(0,'Salvando...');steps = 100;for step = 1:30;waitbar(step / 100);end 
+    for step = 30:100;waitbar(step / 100);end
+    close(wh)
+meshc(handles.axes2 , getGlobalM2);
+set(handles.axes2,'view',[0,-90]);
+
 % hObject    handle to botaoInicial (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -123,10 +145,34 @@ view(-180,90);
 
 % --- Executes on button press in botaoFInal.
 function botaoFInal_Callback(hObject, eventdata, handles)
-set(handles.anguloMov,'String','Heleeeelo World!');
-filename = ('C:\Users\paulotca\Desktop\teste paul\perto.txt ');
-P=importdata(filename);
-meshc(P)
+%set(handles.anguloMov,'String','Heleeeelo World!');
+%filename = ('C:\Users\paulotca\Desktop\teste paul\perto.txt ');
+%P=importdata(filename);
+
+hold on;
+Matt = getGlobalM;
+
+Matt = Matt * 0;
+
+
+%mesh(Matt)
+contour3(Matt)
+%coluna=handles.inputDATA;
+% x = linspace(-pi,pi);
+% y2 = cos(x);
+% plot(x,y2)
+% X= -5:1:5 ;
+% Y = X.^2+2*X+1;
+% plot(X,Y);
+
+
+
+%mesh(coluna);
+%view(0,-90);
+hold off;
+%plot(SALVO_X,SALVO_Y);
+
+%meshc(P)
 % hObject    handle to botaoFInal (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -172,7 +218,8 @@ handle = mesh(getGlobalM)
 get(handle)
 set(handle,'AlignVertexCenters','on')
 get(handle)
-set(handle,'PlotBoxAspectRatio',[1,0.75,0.75])
+%set(handle,'PlotBoxAspectRatio',[1,0.75,0.75])
+view(0,-90)
 
 % hObject    handle to buttonAngulo (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -474,7 +521,10 @@ function calcularArea_Callback(hObject, eventdata, handles)
     end
     
     
+    
   end
+  
+
     
     
    % end
