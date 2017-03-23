@@ -22,7 +22,7 @@ function varargout = telaInicial(varargin)
 
 % Edit the above text to modify the response to help telaInicial
 
-% Last Modified by GUIDE v2.5 17-Mar-2017 19:52:25
+% Last Modified by GUIDE v2.5 23-Mar-2017 15:53:00
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -149,14 +149,24 @@ function botaoFInal_Callback(hObject, eventdata, handles)
 %filename = ('C:\Users\paulotca\Desktop\teste paul\perto.txt ');
 %P=importdata(filename);
 
-hold on;
-Matt = getGlobalM;
+% meshc(handles.axes2 , getGlobalM2);
+% set(handles.axes2,'view',[0,-90]);
 
+Matt = getGlobalM2;
+contour3(handles.axes2 , Matt);
+set(handles.axes2,'view',[0,-90]);
+hold on;
 Matt = Matt * 0;
 
+teste=get(handles.omoY2,'string');
+disp(' teste' )
+hhh=str2double(teste);
+disp(str2double(teste))
+disp(hhh)
+disp(teste)
 
 %mesh(Matt)
-contour3(Matt)
+%
 %coluna=handles.inputDATA;
 % x = linspace(-pi,pi);
 % y2 = cos(x);
@@ -250,18 +260,18 @@ end
 
 
 
-function omoY_Callback(hObject, eventdata, handles)
-% hObject    handle to omoY (see GCBO)
+function omoX2_Callback(hObject, eventdata, handles)
+% hObject    handle to omoX2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of omoY as text
-%        str2double(get(hObject,'String')) returns contents of omoY as a double
+% Hints: get(hObject,'String') returns contents of omoX2 as text
+%        str2double(get(hObject,'String')) returns contents of omoX2 as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function omoY_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to omoY (see GCBO)
+function omoX2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to omoX2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -306,12 +316,14 @@ function pushbutton4_Callback(hObject, eventdata, handles)
     posZ=s.Position(3);
     if i == 1
          set(handles.omoX,'String',posX);
+         set(handles.omoY,'String',posY);
          x1 = posX;
          y1 = posY;
          z1 = posZ;
          
     else
-        set(handles.omoY,'String',posX);
+        set(handles.omoX2,'String',posX);
+        set(handles.omoY2,'String',posY);
         x2 = posX;
         y2 = posY;
         z2 = posZ;
@@ -397,13 +409,15 @@ function calcularArea_Callback(hObject, eventdata, handles)
     %Calculo da omoplata na primeira posição selecionada
     if i == 1
          set(handles.omoX,'String',posX);
+         set(handles.omoY,'String',posY);
          x1 = posX;
          y1 = posY;
          z1 = posZ;
         
          
     else
-        set(handles.omoY,'String',posX);
+        set(handles.omoX2,'String',posX);
+        set(handles.omoY2,'String',posY);
         x2 = posX;
         y2 = posY;
         z2 = posZ;
@@ -531,3 +545,49 @@ function calcularArea_Callback(hObject, eventdata, handles)
 % hObject    handle to calcularArea (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+
+function omoY2_Callback(hObject, eventdata, handles)
+% hObject    handle to omoY2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of omoY2 as text
+%        str2double(get(hObject,'String')) returns contents of omoY2 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function omoY2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to omoY2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function omoY_Callback(hObject, eventdata, handles)
+% hObject    handle to omoY (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of omoY as text
+%        str2double(get(hObject,'String')) returns contents of omoY as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function omoY_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to omoY (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
