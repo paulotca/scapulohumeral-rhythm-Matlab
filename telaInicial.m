@@ -152,33 +152,64 @@ function botaoFInal_Callback(hObject, eventdata, handles)
 % meshc(handles.axes2 , getGlobalM2);
 % set(handles.axes2,'view',[0,-90]);
 
-Matt = getGlobalM2;
-contour3(handles.axes2 , Matt);
-set(handles.axes2,'view',[0,-90]);
+% Matt = getGlobalM2;
+% contour3(handles.axes2 , Matt);
+% set(handles.axes2,'view',[0,-90]);
+
+
 hold on;
-Matt = Matt * 0;
 
-teste=get(handles.omoY2,'string');
-disp(' teste' )
-hhh=str2double(teste);
-disp(str2double(teste))
-disp(hhh)
-disp(teste)
+Matt = getGlobalM2;
 
-%mesh(Matt)
-%
-%coluna=handles.inputDATA;
-% x = linspace(-pi,pi);
-% y2 = cos(x);
-% plot(x,y2)
-% X= -5:1:5 ;
-% Y = X.^2+2*X+1;
-% plot(X,Y);
+ValorY=get(handles.omoY,'string');
+ValorX=get(handles.omoX,'string');
+ValorY=str2double(ValorY);
+ValorX=str2double(ValorX);
+
+% posX=Matt.Position(1);
+% posY=Matt.Position(2);
+% posZ=Matt.Position(3);
+x1 = round(ValorY);
+y1 = round(ValorX);
+
+ii = x1 - 15;
+jj = y1 -15;
+iii = x1 +15;
+jjj = y1 +15;
+
+
+Cal1 = zeros(424,512);
+Cal1= Cal1*NaN;
+
+valorMaior = 9999;
+MaiorX= 0;
+MaiorY=0;
+for j1 = ii:iii
+          
+    for h1=jj:jjj 
+        varx = h1;
+        
+        if varx==jj
+        valorMaior = Matt(j1,h1);
+        else
+            if Matt(j1,h1)< valorMaior
+                MaiorX=j1;
+                MaiorY=h1;
+                valorMaior = Matt(j1,h1);
+            end
+        end
+    end
+    
+    disp(Matt(MaiorX,MaiorY));
+    Cal1(MaiorX,MaiorY)= 34;
+end
 
 
 
-%mesh(coluna);
-%view(0,-90);
+
+
+mesh(Cal1);
+view(0,-90);
 hold off;
 %plot(SALVO_X,SALVO_Y);
 
@@ -476,7 +507,7 @@ function calcularArea_Callback(hObject, eventdata, handles)
                     q =1;
                     w=1;
                 end
-                Cal1(q,w)= MatPaProf(h,j)*AreaUnitaria;
+                Cal1(q,w)= MatPaProf(j,h)*AreaUnitaria;
                 q = q+1;
                 w = w+1;
             end   
@@ -515,7 +546,7 @@ function calcularArea_Callback(hObject, eventdata, handles)
                     q =1;
                     w=1;
                 end
-                Cal2(q,w)= MatPaProf(h,j)*AreaUnitaria;
+                Cal2(q,w)= MatPaProf(j,h)*AreaUnitaria;
                 q = q+1;
                 w = w+1;
             end   
