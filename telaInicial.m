@@ -160,6 +160,7 @@ function botaoFInal_Callback(hObject, eventdata, handles)
 hold on;
 
 Matt = getGlobalM2;
+Matt2=  getGlobalM2;
 
 ValorY=get(handles.omoY,'string');
 ValorX=get(handles.omoX,'string');
@@ -180,10 +181,15 @@ jjj = y1 +15;
 
 Cal1 = zeros(424,512);
 Cal1= Cal1*NaN;
+Cal2 = zeros(424,512);
+Cal2= Cal2*NaN;
 
 valorMaior = 9999;
+valorMenor = 1;
 MaiorX= 0;
 MaiorY=0;
+MenorX =0;
+MenorY =0;
 for j1 = ii:iii
           
     for h1=jj:jjj 
@@ -191,17 +197,33 @@ for j1 = ii:iii
         
         if varx==jj
         valorMaior = Matt(j1,h1);
+        valorMenor = Matt2(j1,h1);
         else
             if Matt(j1,h1)< valorMaior
                 MaiorX=j1;
                 MaiorY=h1;
                 valorMaior = Matt(j1,h1);
             end
+            if Matt(j1,h1)> valorMenor
+                MenorX=j1;
+                MenorY=h1;
+                valorMenor = Matt(j1,h1);
+            end
         end
     end
     
-    disp(Matt(MaiorX,MaiorY));
-    Cal1(MaiorX,MaiorY)= 34;
+    %disp(Matt(MaiorX,MaiorY));
+%     disp(MaiorX);
+%     disp(MaiorY);
+    %if MaiorX == 0 || MaiorY == 0
+%     if MaiorX ~= 0 & MaiorY ~= 0
+        Cal1(MaiorX,MaiorY)= 34;
+        
+        if MenorY ~= 0
+        Cal2(MenorX,MenorY)= 200;
+        pri = 1;
+        end
+%     end
 end
 
 
@@ -209,6 +231,9 @@ end
 
 
 mesh(Cal1);
+if pri == 1
+    mesh(Cal2);
+end
 view(0,-90);
 hold off;
 %plot(SALVO_X,SALVO_Y);
