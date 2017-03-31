@@ -437,6 +437,9 @@ pos = s.Position;
 % --- Executes on button press in calcularArea.
 function calcularArea_Callback(hObject, eventdata, handles)
 
+set(handles.disOmo1,'String','0');
+set(handles.disOmo2,'String','0');
+
   for i = 1:2,
     h = datacursormode;
     set(h,'DisplayStyle','datatip','SnapToData','off');
