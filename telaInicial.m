@@ -206,10 +206,10 @@ for j1 = ii:iii
                 MaiorY=h1;
                 valorMaior = Matt(j1,h1);
             end
-            if Matt(j1,h1)> valorMenor
+            if Matt2(j1,h1)< valorMenor
                 MenorX=j1;
                 MenorY=h1;
-                valorMenor = Matt(j1,h1);
+                valorMenor = Matt2(j1,h1);
             end
         end
     end
