@@ -126,19 +126,17 @@ wh = waitbar(0,'Salvando...');steps = 100;for step = 1:30;waitbar(step / 100);en
 meshc(handles.grafico , getGlobalM);
 set(handles.grafico,'view',[0,-90]);
 
-%imprimir o segundo grafico
-
-% [arquivo, caminho]=uigetfile('*.txt');
-% B2=[caminho,arquivo]
-% %disp(B)
-% N2 = importdata(B2);
-% setM2(N2)
-% %r = getGlobalM
-% wh = waitbar(0,'Salvando...');steps = 100;for step = 1:30;waitbar(step / 100);end 
-%     for step = 30:100;waitbar(step / 100);end
-%     close(wh)
-% meshc(handles.axes2 , getGlobalM2);
-% set(handles.axes2,'view',[0,-90]);
+[arquivo, caminho]=uigetfile('*.txt');
+B2=[caminho,arquivo]
+%disp(B)
+N2 = importdata(B2);
+setM2(N2)
+%r = getGlobalM
+wh = waitbar(0,'Salvando...');steps = 100;for step = 1:30;waitbar(step / 100);end 
+    for step = 30:100;waitbar(step / 100);end
+    close(wh)
+meshc(handles.axes2 , getGlobalM2);
+set(handles.axes2,'view',[0,-90]);
 
 % hObject    handle to botaoInicial (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -161,8 +159,8 @@ function botaoFInal_Callback(hObject, eventdata, handles)
 
 hold on;
 
-Matt = getGlobalM;
-Matt2=  getGlobalM;
+Matt = getGlobalM2;
+Matt2=  getGlobalM2;
 
 ValorY=get(handles.omoY,'string');
 ValorX=get(handles.omoX,'string');
@@ -219,7 +217,7 @@ for j1 = ii:iii
 %     disp(MaiorY);
     %if MaiorX == 0 || MaiorY == 0
 %     if MaiorX ~= 0 & MaiorY ~= 0
-        Cal1(MaiorX,MaiorY)= 100;
+        Cal1(MaiorX,MaiorY)= 34;
         
         if MenorY ~= 0
         Cal2(MenorX,MenorY)= 200;
